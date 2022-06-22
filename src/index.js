@@ -13,13 +13,16 @@ console.log(data)
 let topDogList = document.querySelector(".dogs-list");
 
 let dogCard = document.querySelector(".main__dog-section");
+console.log(dogCard)
+
 
 function addDogToTop (dog){
     let title = document.createElement("li");
     title.className = "dogs-list__button";
-    title.textContent = dog.name
+    title.textContent = dog.name;
     topDogList.append(title);
 }
+
 
 function showDogCard(dog) {
     dogCard.textContent = "";
@@ -46,6 +49,25 @@ function showDogCard(dog) {
     let buttonDiv = document.createElement("div");
     buttonDiv.className = "main__dog-section__btn"; 
     
+    let pTag = document.createElement("p");
+    pTag.textContent = "Is naughty?"
+    let dogButton = document.createElement("button");
+    dogButton.textContent = "Good Dog";
+
+    buttonDiv.append(pTag, dogButton);
+
+    dogButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        if (dog.isGoodDog) {
+            pTag.textContent = "Is naughty? Yes!";
+            dog.isGoodDog = false;
+        }else {
+            pTag.textContent = "Is naughty? No!";
+            dog.isGoodDog = true;
+        }
+    })
+    
+    
     dogCardContainer.append(dogCardTitle, dogImg, dogDescription, buttonDiv);
 
     dogCard.append(dogCardContainer);
@@ -54,9 +76,23 @@ function showDogCard(dog) {
 for(let dogs of data){
     addDogToTop(dogs);
 }
+// let index = 0;
+// addDogToTop.addEventListener("click", function(event){
+//     if(addDogToTop.name=== event[index].name){
+//     showDogCard(data);
+//     index++;
+//     }
+// });
 
-showDogCard(data[0]);
-console.log(showDogCard);
+
+// something not working i'm losing my mind
+let i = 0
+topDogList.addEventListener("click", function(event){
+        // event.preventDefault();
+        i++;
+        showDogCard(data[i]);
+    });
+// showDogCard(data[0]);
 
 // !- Each list item should be clickable. When you click on an item, the selected dog should display on the main card
 // !- The main card should contain all the information from the selected dog. Follow the template for the main card that you'll find on the HTML file.
